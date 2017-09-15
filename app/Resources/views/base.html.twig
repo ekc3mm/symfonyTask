@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Code Review Videos{% endblock %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+        .btn{
+            margin-bottom: 5px;
+        }
+    </style>
+
+    {% block stylesheets %}{% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="{{ path('task-all') }}">All tasks</a>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+                <a class="navbar-brand" href="{{ path('task-user') }}">My tasks</a>
+                <a class="navbar-brand" href="{{ path('task-new') }}">New Task</a>
+                <a class="navbar-brand" href="{{ path('fos_user_security_logout') }}">
+                    Logout
+                </a>
+            {% else %}
+                <a class="navbar-brand" href="{{ path('fos_user_security_login') }}">Login</a>
+                <a class="navbar-brand" href="/register">Registration</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            {% include ('::flash-messages.html.twig') %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+
+</div><!-- /.container -->
+
+{% block javascripts %}
+
+{% endblock %}
+</body>
+</html>
